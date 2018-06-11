@@ -14,6 +14,7 @@ int distance;
 int distance2;
 
 void setup() {
+// Oppretter pinmodes
 pinMode(trigPin, OUTPUT);
 pinMode(echoPin, INPUT); 
 pinMode(trigPin2, OUTPUT);
@@ -43,6 +44,9 @@ duration2 = pulseIn(echoPin2, HIGH);
 distance= duration*0.034/2;
 distance2= duration2*0.034/2;
 
+
+// Dersom sensoren blir krysset, altsaa at distansen ultralydmaaleren klarer aa male blir
+// mindre enn 100 cm, settes led lyset til HIGH
 if (distance < 100){
   digitalWrite(led, HIGH);
 }
@@ -50,6 +54,7 @@ if (distance2 < 100){
   digitalWrite(led, HIGH);
 }
 
+// Dersom knappen blir trykket inn, gaar det stroem gjennom, saa digitalRead blir HIGH
   if (digitalRead(knapp) == HIGH){
     if (erTrykket(knapp)){
       digitalWrite(led, LOW);
@@ -60,6 +65,7 @@ if (distance2 < 100){
 unsigned long previousClick = 0;
 unsigned long debounceDelay = 150;
 
+// Modul faar a registrere om knappen er trykket ved hjelp av millis istedet for delay
 boolean erTrykket(int pin){
   if ((millis() - previousClick) >=debounceDelay){
     previousClick = millis();
